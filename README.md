@@ -24,7 +24,7 @@ Example usage here
 |-----------|-----------------|------------------------------|
 |   root    |  AUTHORS        | List of contributors |
 |   root    |  console.py     | Entry point of the command interpreter |
-|   models  |  __init__.py    | Initializes valid modules as packages |
+|   models  | \_\_init\_\_.py | Initializes valid modules as packages |
 |   models  |  amenity.py     | Amenity class that inherits from BaseModel |
 |   models  | base_model.py   | BaseModel class to define all other classes |
 |   models  |    city.py      | City class that inherits from BaseModel |
@@ -33,7 +33,7 @@ Example usage here
 |   models  |    state.py     | State class that inherits from BaseModel |
 |   models  |    user.py      | User class that inherits from BaseModel |
 |   engine  | file_storage.py | Class that de/serializes from/to JSON file |
-|   engine  |   __init__.py   | Initializes valid modules as packages |
+|   engine  | \_\_init\_\_.py | Initializes valid modules as packages |
 |   tests   | test_console.py | Unittests for all console.py features |
 
 ### Authors
