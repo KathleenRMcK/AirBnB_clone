@@ -22,6 +22,7 @@ Below is a list of the desired console commands and a simple overview on how to 
 - EOF - exits program
 - help - shows documented commands
 - create - creates a new instance
+- count - retrieves number of instances
 - show - prints a string representation
 - destroy - deletes an instance
 - all - prints all string representation
@@ -33,7 +34,7 @@ user$ ./console.py
 (hbnb)
 ```
 
-In this	example, the help command provides information on some commands:
+In this	example, the help command provides information on all project commands:
 ```
 (hbnb) help quit
 Quit command to exit the program
