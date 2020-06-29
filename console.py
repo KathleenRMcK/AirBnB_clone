@@ -23,42 +23,41 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, args):
         """
-        EOF command exits out of the command interpreter
+        EOF command exits out of the console
         """
         quit()
     def do_help(self, args):
         """
-        Command lists all help details for each command
+        list all commands
         """
         cmd.Cmd.do_help(self, args)
 
 
     def do_destroy(self, args):
         """
-        Deletes an instance based on the class name and id
-        saves the changes into JSON file
+        Deletes an instance of the class name and id
+        saves the changes inside JSON file
         """
 
     def do_all(self, args):
         """
         Prints all string representation of all instances
-        based or not on the class name
         """
     def do_count(self, args):
         """
-        Counts number of instances of a class
+        Counts number of instances
         """
 
     def do_create(self, args):
         """
-        Creates a new instance of BaseModel, saves it to JSON file
-        and prints the id
+        Creates a new instance of BaseModel and saves it inside JSON file
+
         """
 
     def do_update(self, args):
         """
         Update an instance based on the class name and id by adding
-        or updating attribute (save the change into the JSON file).
+        or updating object
         """
 
 
@@ -68,13 +67,13 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, args):
         """
-        default method to use with command()
+        default method to use with commands
         """
 
 
     def do_quit(self, args):
         """
-        Quit command exits out of the command interpreter
+        exits out of the console
         """
         quit()
 
