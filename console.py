@@ -80,7 +80,7 @@ class HBNBCommand(cmd.Cmd):
 
     def emptyline(self):
         """
-        Returns back to the prompt
+        prints prompt
         """
         return
 
