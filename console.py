@@ -11,54 +11,146 @@
 # Code should not be executed when imported
 
 import cmd
-# from models.base_model import BaseModel
-# from models.user import User
-# from models.state import State
-# from models.city import City
-# from models.amenity import Amenity
-# from models.place import Place
-# from models.review import Review
+import models
+from models.base_model import BaseModel
+from models.user import User
+from datetime import datetime
+from models.city import City
+from models.state import State
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+
 
 class HBNBCommand(cmd.Cmd):
     """
-    Entry point class begins here
+    Class that inherits from cmd.Cmd
     """
-    prompt = "(hbnb) "
-#    item = [BaseModel, User, State, City, Amenity, Place, Review]
+    prompt = '(hbnb) '
 
-    def do_quit(self, line):
-        """ Allows use of quit command to exit program """
-        return True
+    def do_EOF(self, args):
+        """
+        EOF command exits out of the console
+        """
+        quit()
+    def do_help(self, args):
+        """
+        list all commands
+        """
+        cmd.Cmd.do_help(self, args)
 
-    def do_EOF(self, line):
-        """ Allows use of EOF command to exit program """
-        return True
+
+    def do_destroy(self, args):
+        """
+        Deletes an instance of the class name and id
+        saves the changes inside JSON file
+        """
+        tokens = args.split()
+        if tokens[0] not in HBNBCommand.classes:
+            print("** class doesn't exist **")
+            return
+        if len(tokens) < 2:
+            print("** instance id missing **")
+            return
+        if len(tokens) < 1:
+            print("** class name missing **")
+            return
+        key = tokens[0] + "." + tokens[1]
+        if key in BaseModelStorage:
+            BaseModelStorage.all().pop(key)
+            """ use .save """
+            return
+        else:
+            print("** no instance found **")
+
+    def do_create(self, args):
+        """
+        Creates a new instance of BaseModel and saves it inside JSON flie
+        """
+        tokens = args.split()
+        if len(tokens) < 1:
+            print("** class name missing **")
+            return
+        if tokens[0] in HBNBCommand.classes:
+            if tokens[0] in HBNBCommand.classes:
+                if tokens[0] == "BaseModel":
+                    create_model = BaseModel()
+                if tokens[0] == "User":
+                    create__model = User()
+                if tokens[0] == "State":
+                    create__model = State()
+                if tokens[0] == "Amenity":
+                    create_model = Amenity()
+                if tokens[0] == "Review":
+                    create_model = Review()
+                if tokens[0] == "Place":
+                    create_model = Place()
+                if tokens[0] == "City":
+                    create_model = City()
+                model.save()
+                print(create_model.id)
+
+        else:
+            print("** class doesn't exist **")
+
+
+
+    def do_all(self, args):
+        """
+        Prints all string representation of all instances
+        """
+    def do_count(self, args):
+        """
+        Counts number of instances
+        """
+
+
+    def do_update(self, args):
+        """
+        Update an instance based on the class name and id by adding
+        or updating object
+        """
+
+
+    def do_show(self, args):
+        """ show string representation of an instance"""
+        tokens = args.split()
+        if tokens[0] not in HBNBCommand.classes:
+            print("** class doesn't exist **")
+            return
+        if len(tokens) < 2:
+            if len(args[0]) != 36:
+                print("** instance id missing **")
+            return
+        if len(tokens) < 1:
+            print("** class name missing **")
+            return
+        key = tokens[0] + "." + tokens[1]
+        if key in BaseModelStorage:
+            print()
+            return
+        else:
+            print("** no instance found **")
+
+
+    def default(self, args):
+        """
+        default method to use with commands
+        """
+
+
+    def do_quit(self, args):
+        """
+        exits out of the console
+        """
+        quit()
+
 
     def emptyline(self):
-        """ Allows empty line + ENTER to provide blank space """
-        pass
+        """
+        prints prompt
+        """
+        return
 
-    """
-    ***Help support documentation for all commands***
-    """
-    def help_create(self):
-        """ Documentation for the create command """
-        print 'Use of the create command creates a new instance of BaseModel, saves it to JSON file and prints the id with: create <class name>'
-    def help_show(self):
-        """ Documentation for the show command """
-        print 'Use of the show command retrieves an instance based on its ID with: <class name>.show(<id>)'
-    def help_count(self):
-        """ Documentation for the count command """
-        print 'Use of the count command retrieves the number of instances of a class with: <class name>.count()'
-    def help_destroy(self):
-        """ Documentation for the destroy command """
-        print 'Use of the destroy command destroys an instance based on its ID with: <class name>.destroy(<id>)'
-    def help_all(self):
-        """ Documentation for the all command """
-        print 'Use of the all command retrieves all instances of a class with: <class name>.all()'
-    def help_update(self):
-        """ Documentation for the update command """
-        print 'Use of the update command updates an instance based on its ID with: <class name>.update(<id>, <attribute name>, <attribute value>) and with a dictionary using: <class name>.update(<id>, <dictionary representation>)'
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     HBNBCommand().cmdloop()
