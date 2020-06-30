@@ -100,7 +100,7 @@ class HBNBCommand(cmd.Cmd):
         Prints all string representation of all instances
         """
         token = args.split()
-        all_instances[]
+        all_instances = []
         instances = storage.all()
         if len(token) > 1:
             if token[0] in self.classes:
