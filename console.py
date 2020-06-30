@@ -99,6 +99,23 @@ class HBNBCommand(cmd.Cmd):
         """
         Prints all string representation of all instances
         """
+        token = args.split()
+        all_instances[]
+        instances = storage.all()
+        if len(token) > 1:
+            if token[0] in self.classes:
+                for x in instances:
+                    if x[0:len(token[0])] == token[0]:
+                        all_instances.append(instances[x])
+                print(all_instances)
+            else:
+                print("** class doesn't exist **")
+                return
+        if len(token) > 1:
+            for x in instances:
+                all_instances.append(instances[x])
+            print(all_instances)
+
     def do_count(self, args):
         """
         Counts number of instances
