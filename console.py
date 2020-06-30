@@ -168,6 +168,27 @@ class HBNBCommand(cmd.Cmd):
         prints prompt
         """
         return
+     """
+    ***Help support documentation for all commands***
+    """
+    def help_create(self):
+        """ Documentation for the create command """
+        print 'Use of the create command creates a new instance of BaseModel, saves it to JSON file and prints the id with: create <class name>'
+    def help_show(self):
+        """ Documentation for the show command """
+        print 'Use of the show command retrieves an instance based on its ID with: <class name>.show(<id>)'
+    def help_count(self):
+        """ Documentation for the count command """
+        print 'Use of the count command retrieves the number of instances of a class with: <class name>.count()'
+    def help_destroy(self):
+        """ Documentation for the destroy command """
+        print 'Use of the destroy command destroys an instance based on its ID with: <class name>.destroy(<id>)'
+    def help_all(self):
+        """ Documentation for the all command """
+        print 'Use of the all command retrieves all instances of a class with: <class name>.all()'
+    def help_update(self):
+        """ Documentation for the update command """
+        print 'Use of the update command updates an instance based on its ID with: <class name>.update(<id>, <attribute name>, <attribute value>) and with a dictionary using: <class name>.update(<id>, <dictionary representation>)'
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
