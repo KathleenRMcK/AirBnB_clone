@@ -34,12 +34,12 @@ class BaseModel():
                                       self.__dict__))
 
     def to_dict(self):
-        """ Returns dictionary """
-        dictionary = {}
-        for key, value in self.__dict__.items():
-            if key == 'updated_at' or key == 'created_at':
-                dictionary[key] = value.isoformat()
-            else:
-                dictionary[key] = value
-        dictionary['__class__'] = type(self).__name__
-        return dictionary
+        """
+        function that return a dict rep of instan
+        """
+        dictionary = dict(**self.__dict__)
+        dictionary['__class__'] = str(type(self).__name__)
+        dictionary['created_at'] = self.created_at.isoformat()
+        dictionary['updated_at'] = self.updated_at.isoformat()
+
+        return (dictionary)
