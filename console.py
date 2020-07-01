@@ -15,6 +15,7 @@ import cmd
 from models.user import User
 from datetime import datetime
 from models.city import City
+from models.base_model import BaseModel
 from models.state import State
 from models.amenity import Amenity
 from models.place import Place
@@ -27,8 +28,9 @@ class HBNBCommand(cmd.Cmd):
     Class that inherits from cmd.Cmd
     """
     prompt = '(hbnb) '
-    classes = ["BaseModel", "User", "State", "City",
-               "Amenity", "Place", "Review"]
+    all_classes = {"BaseModel": BaseModel, "User": User, "State": State,
+               "City": City, "Amenity": Amenity, "Place": Place,
+               "Review": Review}
 
     def do_quit(self, line):
         """ Allows use of quit command to exit program """
@@ -102,24 +104,11 @@ class HBNBCommand(cmd.Cmd):
         if len(tokens) < 1:
             print("** class name missing **")
             return
-        if tokens[0] == "BaseModel":
-            create_model = BaseModel()
-        elif tokens[0] == "User":
-            create__model = User()
-        elif tokens[0] == "State":
-            create__model = State()
-        elif tokens[0] == "Amenity":
-            create_model = Amenity()
-        elif tokens[0] == "Review":
-            create_model = Review()
-        elif tokens[0] == "Place":
-            create_model = Place()
-        elif tokens[0] == "City":
-            create_model = City()
-        create_model.save()
-        print(create_model.id)
-
-
+        if tokens[0] in HBNBCommand.all_classes:
+            new_model = HBNBCommand.all_classes[tokens[0]]()
+            storage.new(new_model)
+            storage.save()
+            print(new_model.id)
 
     def do_all(self, args):
         """

@@ -32,9 +32,12 @@ class BaseModel():
         return ("[{}] ({}) {}".format(type(self).__name__, self.id,
                                       self.__dict__))
     def to_dict(self):
-        """dictionary containing all keys"""
-        new_dict = self.__dict__.copy()
-        new_dict['created_at'] = self.created_at.isoformat()
-        new_dict['updated_at'] = self.updated_at.isoformat()
-        new_dict['__class__'] = self.__class__.__name__
-        return new_dict
+        """ Returns dictionary """
+        dictionary = {}
+        for key, value in self.__dict__.items():
+            if key == 'updated_at' or key == 'created_at':
+                dictionary[key] = value.isoformat()
+            else:
+                dictionary[key] = value
+        dictionary['__class__'] = type(self).__name__
+        return dictionary
