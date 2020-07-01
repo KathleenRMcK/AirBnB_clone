@@ -10,7 +10,9 @@
 #     - an empty line + ENTER shouldn't execute
 # Code should not be executed when imported
 
+
 import cmd
+import models
 from models.base_model import BaseModel
 from models.user import User
 from datetime import datetime
@@ -70,6 +72,7 @@ class HBNBCommand(cmd.Cmd):
     def help_update(self):
         """ Documentation for the update command """
         print('Use of the update command updates an instance based on its ID with: <class name>.update(<id>, <attribute name>, <attribute value>) and with a dictionary using: <class name>.update(<id>, <dictionary representation>)')
+
 
 
     def do_destroy(self, args):
@@ -199,6 +202,24 @@ class HBNBCommand(cmd.Cmd):
                 self.do_count(my_list[0])
         else:
             ckd.Cmd.default(self, line)
+
+
+        if tokens[0] not in HBNBCommand.classes:
+            print("** class doesn't exist **")
+            return
+        if len(tokens) < 2:
+            if len(args[0]) != 36:
+                print("** instance id missing **")
+            return
+        if len(tokens) < 1:
+            print("** class name missing **")
+            return
+        key = tokens[0] + "." + tokens[1]
+        if key in BaseModelStorage:
+            print()
+            return
+        else:
+            print("** no instance found **")
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
