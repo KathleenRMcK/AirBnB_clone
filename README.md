@@ -3,7 +3,7 @@
 
 ### Description
 
-In this project, students create their first steps towards building the AirBnB clone. This is done by building a console to interpret desired commands and manage the objects of the AirBnB project. This console must be able to create new objects, retrieve objects, do operations on objects, update objects attributes and destroy objects.  
+In this project, students create their first steps towards building the AirBnB clone. This is done by building a console to interpret desired commands and manage the objects of the AirBnB project. This console must be able to create new objects, retrieve objects, do operations on objects, update objects attributes and destroy objects. For this to be achieved, students must construct a command interpreter with help from the Cmd module. Through this a simple flow is created of serialization through Instance, to Dictionary, to JSON string, then to file and deserialized in the opposite direction back to Instance. This foundation will help build following projects, such as HTML/CSS templating, database storage, API and front-end integration.  
 Below is a basic overview of the entire AirBnB project:
 
 ![Overview for AirBnB Project](/images/AirBnB_Overview.png)
