@@ -11,11 +11,10 @@
 # Code should not be executed when imported
 
 import cmd
-#from models.base_model import BaseModel
+from models.base_model import BaseModel
 from models.user import User
 from datetime import datetime
 from models.city import City
-from models.base_model import BaseModel
 from models.state import State
 from models.amenity import Amenity
 from models.place import Place
@@ -131,16 +130,26 @@ class HBNBCommand(cmd.Cmd):
             print(all_instances)
 
     def do_count(self, args):
-        """
-        Counts number of instances
-        """
-
+        """ Counts number of instances of a class """
+        count_help = 0
+        try:
+            class_list = split(line, " ") 
+            if class_list[0] not in self.all_classes:
+                print("** class doesn't exist **")
+            obj = storage.all()
+            for key in obj:
+                key_help = key.split('.')
+                if key_help[0] == class_list[0]:
+                    count_help += 1
+            print(count_help)
 
     def do_update(self, args):
-        """
-        Update an instance based on the class name and id by adding
-        or updating object
-        """
+        """ Update an instance based on the class name and id by adding
+        or updating object """
+        class_list = split(line, " ")
+        obj = storage.all()
+        key =
+        val = obj[key]
 
 
     def do_show(self, args):
