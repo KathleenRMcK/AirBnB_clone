@@ -146,20 +146,20 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, args):
         """ show string representation of an instance"""
         tokens = args.split()
+        stored_keys = storage.all()
         if len(tokens) < 1:
             print("** class name missing **")
             return
-        if tokens[0] not in HBNBCommand.classes:
+        if tokens[0] not in HBNBCommand.all_classes:
             print("** class doesn't exist **")
             return
-        if len(tokens) < 2:
-            if len(args[0]) != 36:
+        if len(tokens) > 1:
+            key = tokens[0] + "." + tokens[1]
+            if key in stored_keys:
+                show_line = stored_keys[key]
+            print(show_line)
+            if key not in stored_keys:
                 print("** instance id missing **")
-            return
-        key = tokens[0] + "." + tokens[1]
-        if key in BaseModelStorage:
-            print()
-            return
         else:
             print("** no instance found **")
 
