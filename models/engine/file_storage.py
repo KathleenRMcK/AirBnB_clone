@@ -7,6 +7,7 @@ import json
 import models
 import os
 
+
 class FileStorage():
     """ Class that serializes instances to JSON file
     and deserializes JSON to instance """

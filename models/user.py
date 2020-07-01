@@ -8,7 +8,7 @@ from models.base_model import BaseModel
 class User(BaseModel):
     """
     user class
-    Update FileStorage to manage correctly serialization and deserialization of User.
+    Update FileStorage to manage correctly serialization and deserialization
     """
     email = ""
     password = ""

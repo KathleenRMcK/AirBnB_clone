@@ -11,7 +11,6 @@
 # Code should not be executed when imported
 
 import cmd
-#from models.base_model import BaseModel
 from models.user import User
 from datetime import datetime
 from models.city import City
@@ -29,8 +28,8 @@ class HBNBCommand(cmd.Cmd):
     """
     prompt = '(hbnb) '
     all_classes = {"BaseModel": BaseModel, "User": User, "State": State,
-               "City": City, "Amenity": Amenity, "Place": Place,
-               "Review": Review}
+                   "City": City, "Amenity": Amenity, "Place": Place,
+                   "Review": Review}
 
     def do_quit(self, line):
         """ Allows use of quit command to exit program """
@@ -71,7 +70,6 @@ class HBNBCommand(cmd.Cmd):
     def help_update(self):
         """ Documentation for the update command """
         print('Use of the update command updates an instance based on its ID with: <class name>.update(<id>, <attribute name>, <attribute value>) and with a dictionary using: <class name>.update(<id>, <dictionary representation>)')
-
 
     def do_destroy(self, args):
         """
@@ -134,14 +132,11 @@ class HBNBCommand(cmd.Cmd):
         """
         Counts number of instances
         """
-
-
     def do_update(self, args):
         """
         Update an instance based on the class name and id by adding
         or updating object
         """
-
 
     def do_show(self, args):
         """ show string representation of an instance"""
@@ -162,7 +157,6 @@ class HBNBCommand(cmd.Cmd):
                 print("** instance id missing **")
         else:
             print("** no instance found **")
-
 
     def default(self, args):
         """
