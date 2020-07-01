@@ -79,7 +79,8 @@ class HBNBCommand(cmd.Cmd):
         saves the changes inside JSON file
         """
         tokens = args.split()
-        if tokens[0] not in HBNBCommand.classes:
+        stored_keys = storage.all()
+        if tokens[0] not in HBNBCommand.all_classes:
             print("** class doesn't exist **")
             return
         if len(tokens) < 2:
@@ -89,10 +90,9 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         key = tokens[0] + "." + tokens[1]
-        if key in BaseModelStorage:
-            BaseModelStorage.all().pop(key)
-            """ use .save """
-            return
+        if key in stored_keys.keys():
+            stored_keys.pop(key)
+            storage.save()
         else:
             print("** no instance found **")
 
@@ -156,8 +156,8 @@ class HBNBCommand(cmd.Cmd):
         if len(tokens) > 1:
             key = tokens[0] + "." + tokens[1]
             if key in stored_keys:
-                show_line = stored_keys[key]
-            print(show_line)
+                show_output = stored_keys[key]
+            print(show_output)
             if key not in stored_keys:
                 print("** instance id missing **")
         else:
