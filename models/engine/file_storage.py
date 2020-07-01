@@ -40,25 +40,20 @@ class FileStorage():
         try:
             with open(self.__file_path, "r") as file:
                 list_of_dicts = json.loads(file.read())
-
-            for obj_dict in list_of_dicts:
-                if obj_dict['__class__'] == "BaseModel":
-                    from models.base_model import BaseModel
-                    self.new(BaseModel(**obj_dict))
-                if obj_dict['__class__'] == "User":
-                    from models.user import User
-                    self.new(User(**obj_dict))
         except:
             pass
+
     """ Deserializes JSON to __objects if file exists """
-        #try:
-            #with open(self.__file_path, encoding="UTF8") as x:
-                #for key, val in (json.load(x)).__objects.items():
-                    """ Retrieving JSON for serialization """
-                    #name_of_class = val["__class__"]
-                    #name_of_class = models.classes[name_of_class]
-                    #self.__objects[key] = name_of_class(**val)
-                    """ Class selection for serialization """
-        #except FileNotFoundError:
-            """ If no file exists """
-            #pass
+    """
+        try:
+            with open(self.__file_path, encoding="UTF8") as x:
+                for key, val in (json.load(x)).__objects.items():
+                    ""Retrieving JSON for serialization ""
+                    name_of_class = val["__class__"]
+                    name_of_class = models.classes[name_of_class]
+                    self.__objects[key] = name_of_class(**val)
+                    "" Class selection for serialization ""
+        except FileNotFoundError:
+            "" If no file exists ""
+            pass
+    """
