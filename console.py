@@ -135,16 +135,15 @@ class HBNBCommand(cmd.Cmd):
     def do_count(self, args):
         """ Counts number of instances of a class """
         count_help = 0
-        try:
-            class_list = split(line, " ")
-            if class_list[0] not in self.all_classes:
-                print("** class doesn't exist **")
-            obj = storage.all()
-            for key in obj:
-                key_help = key.split('.')
-                if key_help[0] == class_list[0]:
-                    count_help += 1
-            print(count_help)
+        class_list = split(line, " ")
+        if class_list[0] not in self.all_classes:
+            print("** class doesn't exist **")
+        obj = storage.all()
+        for key in obj:
+            key_help = key.split('.')
+            if key_help[0] == class_list[0]:
+                count_help += 1
+        print(count_help)
 
     def do_update(self, args):
         """ Update an instance based on the class name and id by adding
