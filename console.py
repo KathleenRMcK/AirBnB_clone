@@ -133,7 +133,7 @@ class HBNBCommand(cmd.Cmd):
         """ Counts number of instances of a class """
         count_help = 0
         try:
-            class_list = split(line, " ") 
+            class_list = split(line, " ")
             if class_list[0] not in self.all_classes:
                 print("** class doesn't exist **")
             obj = storage.all()
