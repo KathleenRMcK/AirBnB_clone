@@ -146,11 +146,27 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, args):
         """ Update an instance based on the class name and id by adding
         or updating object """
-        class_list = split(line, " ")
+        if not args:
+            print("** class name missing **")
+        class_list = split(args, " ")
+        if class_list[0] not in self.all_classes:
+            print("** class doesn't exist **")
+        if len(class_list) < 2:
+            print("** instance id missing **")
         obj = storage.all()
-        key =
+        key = class_list[0] + '.' + class_list[1]
+        if key not in obj:
+            print("** no instance found **")
+        if len(class_list) < 3:
+            print("** attribute name missing **")
+        if len(class_list) < 4:
+            print("** value missing **")
         val = obj[key]
-
+        try:
+            val.__dict__[class_list[2]] = eval(class_list[3])
+        except Exception:
+            val.__dict__[class_list[2]] = class_list[3]
+            val.save()
 
     def do_show(self, args):
         """ show string representation of an instance"""
@@ -172,12 +188,17 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** no instance found **")
 
-
     def default(self, args):
-        """
-        default method to use with commands
-        """
-
+        """ Default method to use with commands """
+        list_help = line.split('.')
+        if len(list_help) >= 2:
+            """ Updates for tasks 11 and 12 """
+            if list_help[1] == "all()":
+                self.do_all(list_help[0])
+            elif list_help[1] == "count()":
+                self.do_count(my_list[0])
+        else:
+            ckd.Cmd.default(self, line)
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
