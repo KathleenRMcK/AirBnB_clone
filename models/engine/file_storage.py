@@ -5,6 +5,7 @@ to a JSON string and use the de/serialization process
 """
 import json
 import models
+import os
 
 class FileStorage():
     """ Class that serializes instances to JSON file
@@ -34,15 +35,7 @@ class FileStorage():
             """ Send dictionary to JSON """
 
     def reload(self):
-        """ Deserializes JSON to __objects if file exists """
-        try:
-            with open(self.__file_path, encoding="UTF8") as x:
-                for key, val in (json.load(x)).__objects.items():
-                    """ Retrieving JSON for serialization """
-                    name_of_class = val["__class__"]
-                    name_of_class = models.classes[name_of_class]
-                    self.__objects[key] = name_of_class(**val)
-                    """ Class selection for serialization """
-        except FileNotFoundError:
-            """ If no file exists """
-            pass
+        """ Loads data and instances from the json file """
+        if (os.path.isfile(self.__file_path) is True):
+            with open(self.__file_path, 'r') as j_data:
+                FileStorage.__objects = json.load(j_data)
