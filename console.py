@@ -28,8 +28,8 @@ class HBNBCommand(cmd.Cmd):
     """
     prompt = '(hbnb) '
     all_classes = {"BaseModel": BaseModel, "User": User, "State": State,
-               "City": City, "Amenity": Amenity, "Place": Place,
-               "Review": Review}
+                   "City": City, "Amenity": Amenity, "Place": Place,
+                   "Review": Review}
 
     def do_quit(self, line):
         """ Allows use of quit command to exit program """
@@ -70,7 +70,6 @@ class HBNBCommand(cmd.Cmd):
     def help_update(self):
         """ Documentation for the update command """
         print('Use of the update command updates an instance based on its ID with: <class name>.update(<id>, <attribute name>, <attribute value>) and with a dictionary using: <class name>.update(<id>, <dictionary representation>)')
-
 
     def do_destroy(self, args):
         """
