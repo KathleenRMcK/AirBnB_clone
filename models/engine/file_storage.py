@@ -37,5 +37,5 @@ class FileStorage():
     def reload(self):
         """ Loads data and instances from the json file """
         if (os.path.isfile(self.__file_path) is True):
-            with open(self.__file_path, 'r') as j_data:
-                FileStorage.__objects = json.load(j_data)
+            with open(self.__file_path, 'r') as data:
+                FileStorage.__objects = json.load(data)
