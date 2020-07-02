@@ -11,9 +11,16 @@ class BaseModel():
     """ Base Model Class """
     def __init__(self, *args, **kwargs):
         """ intializes id, created_at, and updated_at instance vars """
-        self.id = str(uuid.uuid4())
-        self.updated_at = self.created_at = datetime.now()
-        storage.new(self)
+        if kwargs:
+            for key, value in kwargs.items():
+                if key == "updated_at" or key == "created_at":
+                    value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                if key != "__class__":
+                    setattr(self, key, value)
+        else:
+            self.id = str(uuid.uuid4())
+            self.updated_at = self.created_at = datetime.now()
+            storage.new(self)
 
     def save(self):
         """ Saves current datetime to updated_at """
