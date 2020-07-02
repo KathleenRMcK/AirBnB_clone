@@ -10,10 +10,10 @@ from models import storage
 class BaseModel():
     """ Base Model Class """
     def __init__(self, *args, **kwargs):
-        """ intializes id, created_at, and updated_at instance vars """
+        """ sets up public attributes """
         if kwargs:
             for key, value in kwargs.items():
-                if key == "updated_at" or key == "created_at":
+                if key == "created-at" or key == "updated-at":
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 if key != "__class__":
                     setattr(self, key, value)
