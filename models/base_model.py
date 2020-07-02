@@ -37,7 +37,7 @@ class BaseModel():
         function that return a dict containing key and value
         """
         dictionary = dict(**self.__dict__)
-        dictionary['__class__'] = str(type(self).__name__)
+        dictionary['__class__'] = self.__class__.__name__
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
         return (dictionary)
