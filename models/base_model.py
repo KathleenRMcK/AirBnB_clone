@@ -21,6 +21,7 @@ class BaseModel():
             self.id = str(uuid.uuid4())
             self.updated_at = self.created_at = datetime.now()
             storage.new(self)
+
     def save(self):
         """ Saves current datetime to updated_at """
         self.updated_at = datetime.now()
@@ -30,6 +31,7 @@ class BaseModel():
         """ String representation ofinstance """
         return ("[{}] ({}) {}".format(type(self).__name__, self.id,
                                       self.__dict__))
+
     def to_dict(self):
         """
         function that return a dict containing key and value
