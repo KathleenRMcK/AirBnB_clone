@@ -13,8 +13,6 @@ class BaseModel():
         """ intializes id, created_at, and updated_at instance vars """
         if kwargs:
             for key, data in kwargs.items():
-                print("key is", key)
-                print("data is", data)
                 if key != "__class__":
                     setattr(self, key, data)
                 if key == "created_at" or key == "updated_at":
@@ -32,14 +30,12 @@ class BaseModel():
         """ String representation ofinstance """
         return ("[{}] ({}) {}".format(type(self).__name__, self.id,
                                       self.__dict__))
-
     def to_dict(self):
-        """ Returns dictionary """
-        dictionary = {}
-        for key, value in self.__dict__.items():
-            if key == 'updated_at' or key == 'created_at':
-                dictionary[key] = value.isoformat()
-            else:
-                dictionary[key] = value
-        dictionary['__class__'] = type(self).__name__
-        return dictionary
+        """
+        function that return a dict containing key and value
+        """
+        dictionary = dict(**self.__dict__)
+        dictionary['__class__'] = str(type(self).__name__)
+        dictionary['created_at'] = self.created_at.isoformat()
+        dictionary['updated_at'] = self.updated_at.isoformat()
+        return (dictionary)
