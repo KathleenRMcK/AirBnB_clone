@@ -28,7 +28,7 @@ class HBNBCommand(cmd.Cmd):
 	"""
 	Class that inherits from cmd.Cmd
 	"""
-	prompt = '(hbnb)'
+	prompt = '(hbnb) '
 	all_classes = {"BaseModel": BaseModel, "User": User, "State": State,
 				 "City": City, "Amenity": Amenity, "Place": Place,"Review": Review}
 
