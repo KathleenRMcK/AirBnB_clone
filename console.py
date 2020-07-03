@@ -127,6 +127,8 @@ class HBNBCommand(cmd.Cmd):
         """
         token = args.split()
         all_instances = []
+        if token[0] == 'Fake':
+            return
         if len(token) < 1:
             for x in storage.all().values():
                 all_instances.append(str(x))
