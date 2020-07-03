@@ -218,12 +218,17 @@ class HBNBCommand(cmd.Cmd):
         """
         default method to use with command()
         """
-        spaces = (args.replace('.', ' ').replace('(', ' ').replace(')', ' '))
+        spaces = (args.replace('.', ' ').replace('(', ' ').replace(')', ' ').replace('"', ''))
+        print(spaces)
         tokens = spaces.split()
         second = tokens[0]
         first = tokens[1]
         tokens[0] = first
         tokens[1] = second
+        if len(tokens) > 4:
+            new_args = tokens[1] + ' ' + tokens[2] + ' ' + tokens[3] + ' ' + tokens[4]
+            if tokens[0] == 'update':
+                self.do_update(new_args)
         if len(tokens) > 2:
             new_args = tokens[1] + ' ' + tokens[2]
             if tokens[0] == 'all':
