@@ -211,9 +211,7 @@ class HBNBCommand(cmd.Cmd):
             except UnboundLocalError:
                 pass
             if key not in stored_keys:
-                print("** instance id missing **")
-        if len(tokens) == 2:
-            print("** no instance found **")
+                print("** no instance found **")
         else:
             return
     def default(self, args):
