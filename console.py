@@ -174,7 +174,6 @@ class HBNBCommand(cmd.Cmd):
                 print("** attribute name missing **")
             if len(class_list) < 4:
                 print("** value missing **")
-            val = obj[key]
             if tokens[2] in storage.all()[key].to_dict().keys():
                 setattr(storage.all()[key], tokens[2],
                         type(getattr(storage.all()[key], tokens[2]))(tokens[3]))
@@ -192,11 +191,14 @@ class HBNBCommand(cmd.Cmd):
         if tokens[0] not in HBNBCommand.all_classes:
             print("** class doesn't exist **")
             return
-        if len(tokens) > 1:
+        if len(tokens) >= 2:
             key = tokens[0] + "." + tokens[1]
             if key in stored_keys:
                 show_output = stored_keys[key]
-            print(show_output)
+            try:
+                print(show_output)
+            except UnboundLocalError:
+                pass
             if key not in stored_keys:
                 print("** instance id missing **")
         else:
