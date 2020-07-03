@@ -2,6 +2,7 @@
 
 import cmd
 import models
+import shlex
 from models.base_model import BaseModel
 from models.user import User
 from datetime import datetime
@@ -117,6 +118,8 @@ class HBNBCommand(cmd.Cmd):
             storage.new(new_model)
             storage.save()
             print(new_model.id)
+        else:
+            print("** class doesn't exist **")
 
     def do_all(self, args):
         """
@@ -154,6 +157,7 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, args):
         """ Update an instance based on the class name and id by adding
         or updating object """
+        tokens = shlex.split(args)
         if not args:
             print("** class name missing **")
         class_list = args.split()
@@ -170,11 +174,12 @@ class HBNBCommand(cmd.Cmd):
         if len(class_list) < 4:
             print("** value missing **")
         val = obj[key]
-        try:
-            val.__dict__[class_list[2]] = eval(class_list[3])
-        except Exception:
-            val.__dict__[class_list[2]] = class_list[3]
-            val.save()
+        if tokens[2] in storage.all()[key].to_dict().keys():
+            setattr(storage.all()[key], tokens[2],
+                    type(getattr(storage.all()[key], tokens[2]))(tokens[3]))
+        else:
+            setattr(storage.all()[key], tokens[2], tokens[3])
+        storage.all()[key].save()
 
     def do_show(self, args):
         """ show string representation of an instance"""
