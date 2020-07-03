@@ -36,13 +36,10 @@ class FileStorage():
             """ Send dictionary to JSON """
 
     def reload(self):
-        """ Deserializes the JSON file
-        """
-        try:
-            with open(self.__file_path, "r") as file:
-                list_of_dicts = json.loads(file.read())
-        except:
-            pass
+        """ Loads from json file """
+        if (os.path.isfile(self.__file_path) is True):
+            with open(self.__file_path, 'r') as file:
+                FileStorage.__objects = json.load(file)
 
     """ Deserializes JSON to __objects if file exists """
     """
