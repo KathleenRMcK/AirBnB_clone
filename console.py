@@ -165,6 +165,7 @@ class HBNBCommand(cmd.Cmd):
         if class_list:
             if class_list[0] not in self.all_classes:
                 print("** class doesn't exist **")
+                return
             if len(class_list) < 2:
                 print("** instance id missing **")
             obj = storage.all()
