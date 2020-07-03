@@ -1,15 +1,4 @@
 #!/usr/bin/python3
-# console.py - Entry point of the command interpreter
-# Requirements:
-# Must use cmd module
-# Class definition must be: class HBNBCommand(cmd.Cmd):
-# Command interpreter must implement:
-#     - quit and EOF to exit program
-#     - help (provided by cmd by default, but should be updated)
-#     - custom prompt: (hbnb)
-#     - an empty line + ENTER shouldn't execute
-# Code should not be executed when imported
-
 
 import cmd
 import models
