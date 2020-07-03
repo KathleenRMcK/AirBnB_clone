@@ -15,7 +15,6 @@ from models import storage
 import re
 
 
-
 class HBNBCommand(cmd.Cmd):
     """
     Class that inherits from cmd.Cmd
@@ -110,6 +109,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class name missing **")
             return
+
     def do_create(self, args):
         """
         Creates a new instance of BaseModel and saves it inside JSON flie
@@ -180,7 +180,8 @@ class HBNBCommand(cmd.Cmd):
                         print("** attribute name missing **")
                     if len(class_list) < 4:
                         print("** value missing **")
-                    if tokens[2] in storage.all()[key].to_dict().keys():
+                    if tokens[2] in storage.all()\
+                    [key].to_dict().keys():
                         setattr(storage.all()[key], tokens[2],
                                 type(getattr(storage.all()[key], tokens[2]))(tokens[3]))
                     else:
