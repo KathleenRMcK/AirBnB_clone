@@ -42,18 +42,3 @@ class FileStorage():
                 list_of_dicts = json.loads(file.read())
         except:
             pass
-
-    """ Deserializes JSON to __objects if file exists """
-    """
-        try:
-            with open(self.__file_path, encoding="UTF8") as x:
-                for key, val in (json.load(x)).__objects.items():
-                    ""Retrieving JSON for serialization ""
-                    name_of_class = val["__class__"]
-                    name_of_class = models.classes[name_of_class]
-                    self.__objects[key] = name_of_class(**val)
-                    "" Class selection for serialization ""
-        except FileNotFoundError:
-            "" If no file exists ""
-            pass
-    """
