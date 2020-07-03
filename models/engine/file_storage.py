@@ -8,6 +8,7 @@ import models
 import os
 
 
+
 class FileStorage():
     """ Class that serializes instances to JSON file
     and deserializes JSON to instance """
@@ -36,25 +37,10 @@ class FileStorage():
             """ Send dictionary to JSON """
 
     def reload(self):
-        """ Deserializes the JSON file
-        """
-        try:
-            with open(self.__file_path, "r") as file:
-                list_of_dicts = json.loads(file.read())
-        except:
-            pass
-
-    """ Deserializes JSON to __objects if file exists """
-    """
-        try:
-            with open(self.__file_path, encoding="UTF8") as x:
-                for key, val in (json.load(x)).__objects.items():
-                    ""Retrieving JSON for serialization ""
-                    name_of_class = val["__class__"]
-                    name_of_class = models.classes[name_of_class]
-                    self.__objects[key] = name_of_class(**val)
-                    "" Class selection for serialization ""
-        except FileNotFoundError:
-            "" If no file exists ""
-            pass
-    """
+        """ Reload """
+        if (os.path.isfile(self.__file_path) is True):
+            try:
+                with open(self.__file_path, 'r') as file:
+                    FileStorage.__objects = json.load(file)
+            except:
+                pass
