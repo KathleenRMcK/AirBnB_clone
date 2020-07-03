@@ -220,7 +220,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         key = tokens[0] + "." + tokens[1]
-        if key in BaseModelStorage:
+        if key in BaseModelcrStorage:
             print()
             return
         else:

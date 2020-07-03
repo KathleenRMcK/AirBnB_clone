@@ -1,1 +1,1 @@
-{"BaseModel.dc9f6068-07b2-4778-95d2-a93370c84e08": {"id": "dc9f6068-07b2-4778-95d2-a93370c84e08", "created_at": "2020-07-01T15:39:31.813990", "__class__": "BaseModel"}, "BaseModel.205ef079-341a-474a-baac-4fd8788e4a46": {"id": "205ef079-341a-474a-baac-4fd8788e4a46", "created_at": "2020-07-01T15:39:37.353222", "__class__": "BaseModel"}}
+{"User.e179c3b9-da7f-4eac-929a-b750becc952e": {"id": "e179c3b9-da7f-4eac-929a-b750becc952e", "updated_at": "2020-07-03T00:49:44.553839", "created_at": "2020-07-03T00:49:44.553839", "__class__": "User"}}
