@@ -89,22 +89,25 @@ class HBNBCommand(cmd.Cmd):
         """
         tokens = args.split()
         stored_keys = storage.all()
-        if tokens[0] not in HBNBCommand.all_classes:
-            print("** class doesn't exist **")
-            return
-        if len(tokens) < 2:
-            print("** instance id missing **")
-            return
-        if len(tokens) < 1:
+        if tokens:
+            if tokens[0] not in HBNBCommand.all_classes:
+                print("** class doesn't exist **")
+                return
+            if len(tokens) < 2:
+                print("** instance id missing **")
+                return
+            if len(tokens) < 1:
+                print("** class name missing **")
+                return
+            key = tokens[0] + "." + tokens[1]
+            if key in stored_keys.keys():
+                stored_keys.pop(key)
+                storage.save()
+            else:
+                print("** no instance found **")
+        else:
             print("** class name missing **")
             return
-        key = tokens[0] + "." + tokens[1]
-        if key in stored_keys.keys():
-            stored_keys.pop(key)
-            storage.save()
-        else:
-            print("** no instance found **")
-
     def do_create(self, args):
         """
         Creates a new instance of BaseModel and saves it inside JSON flie
