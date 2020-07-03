@@ -163,10 +163,10 @@ class HBNBCommand(cmd.Cmd):
         class_list = args.split()
         if class_list[0] not in self.all_classes:
             print("** class doesn't exist **")
-        if len(class_list) <= 2:
+        if len(class_list) < 2:
             print("** instance id missing **")
         obj = storage.all()
-        if len(class_list) > 2 and class_list[1] in storage.all():
+        if len(class_list) > 1:
             key = class_list[0] + '.' + class_list[1]
             if key not in obj:
                 print("** no instance found **")
@@ -180,8 +180,6 @@ class HBNBCommand(cmd.Cmd):
             else:
                 setattr(storage.all()[key], tokens[2], tokens[3])
             storage.all()[key].save()
-        else:
-            print("** instance id missing **")
 
     def do_show(self, args):
         """ show string representation of an instance"""
