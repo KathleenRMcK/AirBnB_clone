@@ -15,6 +15,7 @@ from models import storage
 import re
 
 
+
 class HBNBCommand(cmd.Cmd):
     """
     Class that inherits from cmd.Cmd
@@ -109,7 +110,6 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class name missing **")
             return
-
     def do_create(self, args):
         """
         Creates a new instance of BaseModel and saves it inside JSON flie
@@ -171,7 +171,7 @@ class HBNBCommand(cmd.Cmd):
             if len(class_list) < 2:
                 print("** instance id missing **")
             obj = storage.all()
-            if len(class_list) >= 2:
+            if len(class_list) > 3:
                 key = class_list[0] + '.' + class_list[1]
                 if key not in obj:
                     print("** no instance found **")
@@ -180,11 +180,9 @@ class HBNBCommand(cmd.Cmd):
                         print("** attribute name missing **")
                     if len(class_list) < 4:
                         print("** value missing **")
-                    if tokens[2]\
-                            in storage.all()[key].to_dict().keys():
+                    if tokens[2] in storage.all()[key].to_dict().keys():
                         setattr(storage.all()[key], tokens[2],
-                                type(getattr(storage.all()
-                                             [key], tokens[2]))(tokens[3]))
+                                type(getattr(storage.all()[key], tokens[2]))(tokens[3]))
                     else:
                         setattr(storage.all()[key], tokens[2], tokens[3])
                     storage.all()[key].save()
@@ -216,13 +214,11 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
         else:
             return
-
     def default(self, args):
         """
         default method to use with command()
         """
-        spaces = (args.replace('.', ' ').replace('(', ' ')
-                  .replace(')', ' ').replace('"', ''))
+        spaces = (args.replace('.', ' ').replace('(', ' ').replace(')', ' ').replace('"', ''))
         print(spaces)
         tokens = spaces.split()
         second = tokens[0]
@@ -230,8 +226,7 @@ class HBNBCommand(cmd.Cmd):
         tokens[0] = first
         tokens[1] = second
         if len(tokens) > 4:
-            new_args = tokens[1] + ' ' + tokens[2]
-            + ' ' + tokens[3] + ' ' + tokens[4]
+            new_args = tokens[1] + ' ' + tokens[2] + ' ' + tokens[3] + ' ' + tokens[4]
             if tokens[0] == 'update':
                 self.do_update(new_args)
         if len(tokens) > 2:
