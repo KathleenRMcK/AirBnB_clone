@@ -171,7 +171,7 @@ class HBNBCommand(cmd.Cmd):
             if len(class_list) < 2:
                 print("** instance id missing **")
             obj = storage.all()
-            if len(class_list) > 3:
+            if len(class_list) >= 2:
                 key = class_list[0] + '.' + class_list[1]
                 if key not in obj:
                     print("** no instance found **")
