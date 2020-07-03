@@ -247,6 +247,8 @@ class HBNBCommand(cmd.Cmd):
                 self.do_show(new_args)
             if tokens[0] == 'update':
                 self.do_update(new_args)
+            if tokens[0] == 'count':
+                self.do_count(new_args)
 
 
 if __name__ == "__main__":
