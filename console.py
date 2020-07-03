@@ -175,6 +175,9 @@ class HBNBCommand(cmd.Cmd):
             if len(class_list) == 2:
                 print("** attribute name missing **")
                 return
+            if len(class_list) == 3:
+                print("** value missing **")
+                return
             if len(class_list) > 2:
                 key = class_list[0] + '.' + class_list[1]
                 if key not in obj:
