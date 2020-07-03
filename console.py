@@ -196,6 +196,9 @@ class HBNBCommand(cmd.Cmd):
         if len(tokens) < 1:
             print("** class name missing **")
             return
+        if len(tokens) == 1:
+            print("** instance id missing **")
+            return
         if tokens[0] not in HBNBCommand.all_classes:
             print("** class doesn't exist **")
             return
@@ -209,8 +212,10 @@ class HBNBCommand(cmd.Cmd):
                 pass
             if key not in stored_keys:
                 print("** instance id missing **")
-        else:
+        if len(tokens) == 2:
             print("** no instance found **")
+        else:
+            return
     def default(self, args):
         """
         default method to use with command()
@@ -223,7 +228,6 @@ class HBNBCommand(cmd.Cmd):
         tokens[1] = second
         if len(tokens) > 2:
             new_args = tokens[1] + ' ' + tokens[2]
-            print(new_args)
             if tokens[0] == 'all':
                 self.do_all(new_args)
             elif tokens[0] == 'destroy':
@@ -236,7 +240,6 @@ class HBNBCommand(cmd.Cmd):
                 self.do_update(new_args)
         else:
             new_args = tokens[1]
-            print(new_args)
             if tokens[0] == 'all':
                 self.do_all(new_args)
             elif tokens[0] == 'destroy':
