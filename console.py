@@ -168,20 +168,21 @@ class HBNBCommand(cmd.Cmd):
             if len(class_list) < 2:
                 print("** instance id missing **")
             obj = storage.all()
-            if len(class_list) > 1:
+            if len(class_list) > 3:
                 key = class_list[0] + '.' + class_list[1]
                 if key not in obj:
                     print("** no instance found **")
-                if len(class_list) < 3:
-                    print("** attribute name missing **")
-                if len(class_list) < 4:
-                    print("** value missing **")
-                if tokens[2] in storage.all()[key].to_dict().keys():
-                    setattr(storage.all()[key], tokens[2],
-                            type(getattr(storage.all()[key], tokens[2]))(tokens[3]))
-                else:
-                    setattr(storage.all()[key], tokens[2], tokens[3])
-                storage.all()[key].save()
+                if key in obj:
+                    if len(class_list) < 3:
+                        print("** attribute name missing **")
+                    if len(class_list) < 4:
+                        print("** value missing **")
+                    if tokens[2] in storage.all()[key].to_dict().keys():
+                        setattr(storage.all()[key], tokens[2],
+                                type(getattr(storage.all()[key], tokens[2]))(tokens[3]))
+                    else:
+                        setattr(storage.all()[key], tokens[2], tokens[3])
+                    storage.all()[key].save()
         else:
             print("** class name missing **")
 
