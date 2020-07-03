@@ -12,6 +12,8 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 from models import storage
+import re
+
 
 
 class HBNBCommand(cmd.Cmd):
@@ -209,36 +211,43 @@ class HBNBCommand(cmd.Cmd):
                 print("** instance id missing **")
         else:
             print("** no instance found **")
-
     def default(self, args):
-        """ Default method to use with commands """
-        list_help = args.split('.')
-        tokens = args.split()
-        if len(list_help) >= 2:
-            """ Updates for tasks 11 and 12 """
-            if list_help[1] == "all()":
-                self.do_all(list_help[0])
-            elif list_help[1] == "count()":
-                self.do_count(list_help[0])
+        """
+        default method to use with command()
+        """
+        spaces = (args.replace('.', ' ').replace('(', ' ').replace(')', ' '))
+        tokens = spaces.split()
+        second = tokens[0]
+        first = tokens[1]
+        tokens[0] = first
+        tokens[1] = second
+        if len(tokens) > 2:
+            new_args = tokens[1] + ' ' + tokens[2]
+            print(new_args)
+            if tokens[0] == 'all':
+                self.do_all(new_args)
+            elif tokens[0] == 'destroy':
+                self.do_destroy(new_args)
+            if tokens[0] == 'create':
+                self.do_create(new_args)
+            if tokens[0] == 'show':
+                self.do_show(new_args)
+            if tokens[0] == 'update':
+                self.do_update(new_args)
         else:
-            cmd.Cmd.default(self, args)
+            new_args = tokens[1]
+            print(new_args)
+            if tokens[0] == 'all':
+                self.do_all(new_args)
+            elif tokens[0] == 'destroy':
+                self.do_destroy(new_args)
+            if tokens[0] == 'create':
+                self.do_create(new_args)
+            if tokens[0] == 'show':
+                self.do_show(new_args)
+            if tokens[0] == 'update':
+                self.do_update(new_args)
 
-        if tokens[0] not in HBNBCommand.classes:
-            print("** class doesn't exist **")
-            return
-        if len(tokens) < 2:
-            if len(args[0]) != 36:
-                print("** instance id missing **")
-            return
-        if len(tokens) < 1:
-            print("** class name missing **")
-            return
-        key = tokens[0] + "." + tokens[1]
-        if key in BaseModelcrStorage:
-            print()
-            return
-        else:
-            print("** no instance found **")
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
