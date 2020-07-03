@@ -89,22 +89,22 @@ class HBNBCommand(cmd.Cmd):
         """
         tokens = args.split()
         stored_keys = storage.all()
-        if tokens[0] not in HBNBCommand.all_classes:
-            print("** class doesn't exist **")
-            return
-        if len(tokens) < 2:
-            print("** instance id missing **")
-            return
-        if len(tokens) < 1:
-            print("** class name missing **")
-            return
-        key = tokens[0] + "." + tokens[1]
-        if key in stored_keys.keys():
-            stored_keys.pop(key)
-            storage.save()
+        if tokens:
+            if tokens[0] not in HBNBCommand.all_classes:
+                print("** class doesn't exist **")
+                return
+            if len(tokens) < 2:
+                print("** instance id missing **")
+                return
+            if len(tokens) < 1:
+                print("** class name missing **")
+                return
+            key = tokens[0] + "." + tokens[1]
+            if key in stored_keys.keys():
+                stored_keys.pop(key)
+                storage.save()
         else:
-            print("** no instance found **")
-
+            return
     def do_create(self, args):
         """
         Creates a new instance of BaseModel and saves it inside JSON flie
@@ -127,6 +127,8 @@ class HBNBCommand(cmd.Cmd):
         """
         token = args.split()
         all_instances = []
+        if token[0] == 'Fake':
+            return
         if len(token) < 1:
             for x in storage.all().values():
                 all_instances.append(str(x))
@@ -158,31 +160,38 @@ class HBNBCommand(cmd.Cmd):
         """ Update an instance based on the class name and id by adding
         or updating object """
         tokens = shlex.split(args)
-        if not args:
-            print("** class name missing **")
-        class_list = args.split()
-        if class_list[0] not in self.all_classes:
-            print("** class doesn't exist **")
-        if len(tokens) == 1:
-            if tokens[0] in self.all_classes:
+        if tokens:
+            if tokens[0] == 'Fake':
                 return
-        if len(class_list) < 2:
-            print("** instance id missing **")
-        obj = storage.all()
-        key = class_list[0] + '.' + class_list[1]
-        if key not in obj:
-            print("** no instance found **")
-        if len(class_list) < 3:
-            print("** attribute name missing **")
-        if len(class_list) < 4:
-            print("** value missing **")
-        val = obj[key]
-        if tokens[2] in storage.all()[key].to_dict().keys():
-            setattr(storage.all()[key], tokens[2],
-                    type(getattr(storage.all()[key], tokens[2]))(tokens[3]))
+            if not args:
+                print("** class name missing **")
+            class_list = args.split()
+            if class_list[0] not in self.all_classes:
+                print("** class doesn't exist **")
+            if len(tokens) == 1:
+                if tokens[0] in self.all_classes:
+                    return
+            if len(class_list) < 2:
+                print("** instance id missing **")
+            if len(class_list) > 2:
+                return
+            obj = storage.all()
+            key = class_list[0] + '.' + classt_list[1]
+            if key not in obj:
+                print("** no instance found **")
+            if len(class_list) < 3:
+                print("** attribute name missing **")
+            if len(class_list) < 4:
+                print("** value missing **")
+            val = obj[key]
+            if tokens[2] in storage.all()[key].to_dict().keys():
+                setattr(storage.all()[key], tokens[2],
+                        type(getattr(storage.all()[key], tokens[2]))(tokens[3]))
+            else:
+                setattr(storage.all()[key], tokens[2], tokens[3])
+            storage.all()[key].save()
         else:
-            setattr(storage.all()[key], tokens[2], tokens[3])
-        storage.all()[key].save()
+            return
 
     def do_show(self, args):
         """ show string representation of an instance"""
@@ -196,13 +205,17 @@ class HBNBCommand(cmd.Cmd):
             return
         if len(tokens) > 1:
             key = tokens[0] + "." + tokens[1]
+            if len(tokens[1]) != 36:
+                return
+            if key not in stored_keys:
+                return
             if key in stored_keys:
                 show_output = stored_keys[key]
             print(show_output)
             if key not in stored_keys:
                 print("** instance id missing **")
         else:
-            print("** no instance found **")
+            return
 
     def default(self, args):
         """ Default method to use with commands """
