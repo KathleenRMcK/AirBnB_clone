@@ -132,7 +132,7 @@ class HBNBCommand(cmd.Cmd):
                 all_instances.append(str(x))
             print(all_instances)
         else:
-            classes = HBNBCommand.classes
+            classes = HBNBCommand.all_classes
             if token[0] not in classes:
                 print("** class doesn't exist **")
                 return
@@ -163,6 +163,9 @@ class HBNBCommand(cmd.Cmd):
         class_list = args.split()
         if class_list[0] not in self.all_classes:
             print("** class doesn't exist **")
+        if len(tokens) == 1:
+            if tokens[0] in self.all_classes:
+                return
         if len(class_list) < 2:
             print("** instance id missing **")
         obj = storage.all()
