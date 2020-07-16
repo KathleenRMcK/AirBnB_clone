@@ -7,6 +7,7 @@ section.filters {
     border: 1px solid #DDDDDD;
     border-radius: 4px;
     display: flex;
+    z-index: 999;
 }
 
 section.filters button {
@@ -55,11 +56,8 @@ ul.popover {
     border-radius: 4px;
     background-color: #FAFAFA;
     width: 100%;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 0px;
-    padding-right: 50px;
-    list-style: none;    
+    padding: 30px 40px 40px 30px;
+    list-style: none;
 }
 
 div.locations ul, div.amenities ul {
